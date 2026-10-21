@@ -4,70 +4,219 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0b0714">
-  <title>Word Trap | Party Game</title>
+  <meta name="theme-color" content="#172B4D">
+  <meta name="description" content="Play Word Trap, the fast-paced team word guessing party game.">
+  <title>Word Trap — Party Game</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="app">
     <header class="topbar">
-      <a class="logo" href="#">WORD<span>TRAP</span></a>
+      <a class="logo" href="#" aria-label="Word Trap home">
+        WORD<span>TRAP</span>
+      </a>
       <span class="topbar-tag">THE PARTY WORD GAME</span>
     </header>
 
     <main>
-      <section class="hero">
-        <p class="eyebrow">THINK FAST. DON'T SLIP.</p>
-        <h1>Welcome to <span>Word Trap.</span></h1>
-        <p class="subtitle">
-          Describe the word. Avoid the forbidden words.
-          Beat the clock and lead your team to victory.
-        </p>
-        <button id="startSetupBtn" class="primary-btn">
-          Set Up Your Game <span>→</span>
-        </button>
-      </section>
+      <!-- SETUP SCREEN -->
+      <section id="setupScreen">
+        <section class="hero">
+          <p class="eyebrow">THINK FAST. DON'T SLIP.</p>
+          <h1>Welcome to <span>Word Trap.</span></h1>
+          <p class="subtitle">
+            Describe the secret word. Avoid the forbidden words.
+            Beat the clock and lead your team to victory!
+          </p>
+          <button id="jumpToSetup" class="primary-btn">
+            Set Up Your Game →
+          </button>
+          <div class="hero-pills">
+            <span>⏱️ 60-second turns</span>
+            <span>👥 Unlimited teams</span>
+            <span>🏆 Score battles</span>
+          </div>
+        </section>
 
-      <section class="rules">
-        <h2>How to play</h2>
-        <div class="rule-grid">
-          <article class="rule-card">
-            <span class="rule-number">01</span>
-            <h3>Describe it</h3>
-            <p>Help your teammates guess the secret word without saying the forbidden words.</p>
-          </article>
-          <article class="rule-card">
-            <span class="rule-number">02</span>
-            <h3>Beat the clock</h3>
-            <p>Your team gets 60 seconds to guess as many words as possible.</p>
-          </article>
-          <article class="rule-card">
-            <span class="rule-number">03</span>
-            <h3>Avoid the trap</h3>
-            <p>Say a forbidden word and your team loses one point.</p>
-          </article>
-        </div>
-      </section>
-
-      <section id="setupSection" class="setup-section hidden">
-        <h2>Build your teams</h2>
-        <p class="section-note">Create as many teams as your group needs.</p>
-
-        <div class="setup-card">
-          <label for="teamNameInput">Team name</label>
-          <div class="input-row">
-            <input id="teamNameInput" type="text"
-              placeholder="e.g. The Brainiacs" maxlength="30">
-            <button id="addTeamBtn" class="secondary-btn">+ Add Team</button>
+        <section class="setup-section" id="teamSetup">
+          <div class="section-heading">
+            <p class="eyebrow dark-eyebrow">FIRST THINGS FIRST</p>
+            <h2>Build your teams</h2>
+            <p class="section-note">You need at least two teams to play.</p>
           </div>
 
-          <ul id="teamList" class="team-list"></ul>
+          <div class="setup-card">
+            <label for="teamNameInput">Team name</label>
+            <div class="input-row">
+              <input id="teamNameInput" type="text"
+                maxlength="30" placeholder="e.g. The Brainiacs"
+                autocomplete="off">
+              <button id="addTeamBtn" class="secondary-btn">+ Add Team</button>
+            </div>
 
-          <button id="continueBtn" class="primary-btn">
-            Continue to Game →
-          </button>
-          <p id="setupMessage" class="message" aria-live="polite"></p>
+            <ul id="teamList" class="team-list"></ul>
+            <p id="teamCount" class="team-count">0 teams added</p>
+
+            <div class="field-group">
+              <label for="categorySelect">Question category</label>
+              <select id="categorySelect">
+                <option value="All">🎲 All Categories</option>
+                <option value="Funny">😂 Funny</option>
+                <option value="Movies">🎬 Movies & Entertainment</option>
+                <option value="Food">🍕 Food & Drink</option>
+                <option value="Everyday">🏠 Everyday Life</option>
+                <option value="College">🎓 College & School</option>
+                <option value="Chaos">🤯 Chaos</option>
+              </select>
+            </div>
+
+            <div class="settings-summary">
+              <div>
+                <span class="setting-icon">⏱️</span>
+                <span><strong>60 seconds</strong><small>Each team's turn</small></span>
+              </div>
+              <div>
+                <span class="setting-icon">🚫</span>
+                <span><strong>−1 point</strong><small>Forbidden word</small></span>
+              </div>
+              <div>
+                <span class="setting-icon">✅</span>
+                <span><strong>+1 point</strong><small>Correct guess</small></span>
+              </div>
+            </div>
+
+            <button id="startGameBtn" class="primary-btn full-btn">
+              Start Word Trap 🚀
+            </button>
+            <p id="setupMessage" class="message" aria-live="polite"></p>
+          </div>
+        </section>
+
+        <section class="rules-section">
+          <div class="section-heading">
+            <p class="eyebrow dark-eyebrow">EASY TO LEARN</p>
+            <h2>How to play</h2>
+          </div>
+          <div class="rule-grid">
+            <article class="rule-card coral-card">
+              <span class="rule-number">01</span>
+              <h3>Describe it</h3>
+              <p>Explain the secret word without saying any of the forbidden words.</p>
+            </article>
+            <article class="rule-card teal-card">
+              <span class="rule-number">02</span>
+              <h3>Beat the clock</h3>
+              <p>Get as many correct guesses as possible before the 60-second timer ends.</p>
+            </article>
+            <article class="rule-card yellow-card">
+              <span class="rule-number">03</span>
+              <h3>Don't get trapped</h3>
+              <p>Each correct guess earns a point. Each forbidden-word violation costs a point.</p>
+            </article>
+          </div>
+        </section>
+      </section>
+
+      <!-- GAME SCREEN -->
+      <section id="gameScreen" class="hidden">
+        <div class="game-topline">
+          <button id="backToSetupBtn" class="text-btn">← Setup</button>
+          <span class="live-label"><span class="live-dot"></span> GAME IN PROGRESS</span>
+          <button id="endGameBtn" class="text-btn danger-text">End game</button>
         </div>
+
+        <section class="turn-banner">
+          <p class="eyebrow">IT'S YOUR TURN</p>
+          <h1 id="currentTeamName">Team 1</h1>
+          <p id="turnSubtitle">Get ready to describe!</p>
+          <div class="timer-wrap">
+            <div id="timerDisplay" class="timer-display">60</div>
+            <span>SECONDS LEFT</span>
+          </div>
+          <div class="timer-track">
+            <div id="timerBar" class="timer-bar"></div>
+          </div>
+          <button id="startTurnBtn" class="primary-btn">Start Turn ▶</button>
+        </section>
+
+        <div class="game-layout">
+          <section class="play-area">
+            <div class="card-topline">
+              <span id="categoryBadge" class="category-badge">CATEGORY</span>
+              <span id="cardCounter" class="card-counter">Card 1</span>
+            </div>
+
+            <div id="wordCard" class="word-card">
+              <p class="card-instruction">YOUR SECRET WORD IS</p>
+              <h2 id="secretWord">Ready?</h2>
+              <div class="forbidden-section">
+                <p>🚫 FORBIDDEN WORDS</p>
+                <div id="forbiddenWords" class="forbidden-words"></div>
+              </div>
+              <p class="card-tip">Don't let your teammates see this card if you're the describer!</p>
+            </div>
+
+            <div class="card-actions">
+              <button id="correctBtn" class="action-btn correct-btn" disabled>
+                <span>✓</span> Correct
+              </button>
+              <button id="skipBtn" class="action-btn skip-btn" disabled>
+                <span>↻</span> Skip
+              </button>
+              <button id="trapBtn" class="action-btn trap-btn" disabled>
+                <span>!</span> Forbidden!
+              </button>
+            </div>
+            <p id="gameMessage" class="message" aria-live="polite">
+              Start your turn when everyone is ready.
+            </p>
+          </section>
+
+          <aside class="score-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow dark-eyebrow">THE BATTLE</p>
+                <h2>Scoreboard</h2>
+              </div>
+              <span class="trophy-icon">🏆</span>
+            </div>
+            <div id="scoreList" class="score-list"></div>
+            <div class="score-legend">
+              <p><span class="legend-dot green-dot"></span> Correct guess: +1</p>
+              <p><span class="legend-dot red-dot"></span> Forbidden word: −1</p>
+              <p><span class="legend-dot grey-dot"></span> Skip: 0</p>
+            </div>
+            <button id="nextTeamBtn" class="secondary-btn full-btn hidden">
+              Next Team →
+            </button>
+          </aside>
+        </div>
+
+        <section class="round-info">
+          <div><span id="roundNumber">1</span><small>Turns completed</small></div>
+          <div><span id="totalCorrect">0</span><small>Correct guesses</small></div>
+          <div><span id="totalTraps">0</span><small>Forbidden words</small></div>
+          <div><span id="totalSkips">0</span><small>Cards skipped</small></div>
+        </section>
+      </section>
+
+      <!-- RESULTS SCREEN -->
+      <section id="resultsScreen" class="hidden">
+        <div class="results-hero">
+          <div class="results-emoji">🏆</div>
+          <p class="eyebrow">GAME COMPLETE</p>
+          <h1 id="winnerHeading">We have a winner!</h1>
+          <p id="winnerSubtitle">What a battle!</p>
+        </div>
+
+        <section class="results-panel">
+          <h2>Final leaderboard</h2>
+          <div id="finalLeaderboard" class="score-list final-list"></div>
+          <div class="results-actions">
+            <button id="playAgainBtn" class="primary-btn">Play Again ↻</button>
+            <button id="newGameBtn" class="secondary-btn">New Teams</button>
+          </div>
+        </section>
       </section>
     </main>
 
